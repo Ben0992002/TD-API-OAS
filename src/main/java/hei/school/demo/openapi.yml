@@ -1,0 +1,61 @@
+openapi: 3.1.0
+info:
+  title: API Gestion de Cuisine - HEI
+  version: '1.0'
+  description: "YML est beaucoup plus lisible pour les humains"
+
+paths:
+  /ping:
+    get:
+      responses:
+        '200':
+          description: Pong
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: Pong
+
+  /dishes:
+    get:
+      summary: Récupère la liste des plats (Exo 2.d)
+      responses:
+        '200':
+          description: "Liste des plats avec prix et ingrédients"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dish'
+
+components:
+  schemas:
+    Ingredient:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        unitPrice:
+          type: number
+
+    Dish:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "dish_1"
+        name:
+          type: string
+          example: "Romazava"
+        unitPrice:
+          type: number
+          description: "Prix de vente du plat"
+          example: 15000.0
+        ingredients:
+          type: array
+          description: "Liste des ingrédients qui composent le plat"
+          items:
+            $ref: '#/components/schemas/Ingredient'
